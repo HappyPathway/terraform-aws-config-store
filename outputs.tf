@@ -1,5 +1,5 @@
 locals {
-  secret         = var.init_secrets ? data.aws_secretsmanager_secret_version.secret : data.aws_secretsmanager_secret_version.secret_non_init
+  secret         = var.init_secrets ? data.aws_secretsmanager_secret.secret : data.aws_secretsmanager_secret.secret_non_init
   secret_version = var.init_secrets ? data.aws_secretsmanager_secret_version.secret_version : data.aws_secretsmanager_secret_version.secret_non_init_version
 }
 

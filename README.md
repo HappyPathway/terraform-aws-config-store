@@ -36,8 +36,8 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_init_parameters"></a> [init\_parameters](#input\_init\_parameters) | n/a | `bool` | `false` | no |
 | <a name="input_init_secrets"></a> [init\_secrets](#input\_init\_secrets) | n/a | `bool` | `false` | no |
-| <a name="input_parameters"></a> [parameters](#input\_parameters) | A map of parameters to create in Parameter Store | <pre>list(object({<br>    name  = string<br>    value = string<br>    type  = string<br>  }))</pre> | `[]` | no |
-| <a name="input_secrets"></a> [secrets](#input\_secrets) | Missing Vraiables:  [ "secret\_string", "path\_key", "path\_prefix" ] | <pre>list(object({<br>    path_prefix   = string<br>    path_key      = string<br>    secret_string = string<br>  }))</pre> | `[]` | no |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | A map of parameters to create in Parameter Store | <pre>list(object({<br>    name  = string<br>    value = optional(string, null)<br>    type  = string<br>  }))</pre> | `[]` | no |
+| <a name="input_secrets"></a> [secrets](#input\_secrets) | Missing Vraiables:  [ "secret\_string", "path\_key", "path\_prefix" ] | <pre>list(object({<br>    path_prefix   = string<br>    path_key      = string<br>    secret_string = optional(string, null)<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

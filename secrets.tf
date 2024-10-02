@@ -41,5 +41,5 @@ data "aws_secretsmanager_secret" "secret_non_init" {
 
 data "aws_secretsmanager_secret_version" "secret_non_init_version" {
   for_each  = var.init_secrets ? {} : { for s in var.secrets : "${s.path_prefix}/${s.path_key}" => s }
-  secret_id = data.aws_secretsmanager_secret.secret[each.key].id
+  secret_id = data.aws_secretsmanager_secret.secret_non_init[each.key].id
 }

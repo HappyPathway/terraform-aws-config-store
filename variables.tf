@@ -21,3 +21,13 @@ variable "parameters" {
   }))
   default = []
 }
+
+variable "init_parameters" {
+  type    = bool
+  default = false
+}
+
+variable "init_secrets" {
+  type    = bool
+  default = false
+}

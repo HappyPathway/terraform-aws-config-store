@@ -4,7 +4,7 @@ output "secrets_arns" {
 }
 
 locals {
-  secret_version = var.init_secrets ? aws_secretsmanager_secret_version.secret_version : aws_secretsmanager_secret_version.secret_non_init_version
+  secret_version = var.init_secrets ? data.aws_secretsmanager_secret_version.secret_version : data.aws_secretsmanager_secret_version.secret_non_init_version
 }
 
 output "secrets_version_ids" {
@@ -18,18 +18,22 @@ output "secrets_plaintext" {
   sensitive   = true
 }
 
+locals {
+  parameter = var.init_parameters ? data.aws_ssm_parameter.parameter :  data.aws_ssm_parameter.parameter_non_init
+}
+
 output "parameter_arns" {
   description = "The ARNs of the created parameters"
-  value       = { for k, v in aws_ssm_parameter.parameter : k => v.arn }
+  value       = { for k, v in local.parameter : k => v.arn }
 }
 
 output "parameter_names" {
   description = "The names of the created parameters"
-  value       = { for k, v in aws_ssm_parameter.parameter : k => v.name }
+  value       = { for k, v in local.parameter : k => v.name }
 }
 
 output "parameter_values" {
   description = "The values of the created parameters"
-  value       = { for k, v in data.aws_ssm_parameter.parameter : k => v.value }
+  value       = { for k, v in local.parameter : k => v.value }
   sensitive   = true
 }

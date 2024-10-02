@@ -19,7 +19,7 @@ output "secrets_plaintext" {
 }
 
 locals {
-  parameter = var.init_parameters ? data.aws_ssm_parameter.parameter :  data.aws_ssm_parameter.parameter_non_init
+  parameter = var.init_parameters ? data.aws_ssm_parameter.parameter : data.aws_ssm_parameter.parameter_non_init
 }
 
 output "parameter_arns" {

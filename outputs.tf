@@ -1,6 +1,6 @@
 output "secrets_arns" {
   description = "The ARNs of the created secrets"
-  value       = { for k, v in aws_secretsmanager_secret.secret : k => v.arn }
+  value       = var.init_secrets ? { for k, v in aws_secretsmanager_secret.secret : k => v.arn } : {}
 }
 
 locals {

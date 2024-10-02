@@ -13,6 +13,7 @@ jobs:
     with:
       terraform_version: ${{vars.TERRAFORM_VERSION}}
       terraform_api: ${{vars.TERRAFORM_API}}
+      terraform_init: true
       github_username: ${{vars.GH_USERNAME}}
       github_email: ${{vars.GH_EMAIL}}
       github_org: ${{ vars.GH_ORG }}

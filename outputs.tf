@@ -3,15 +3,18 @@ output "secrets_arns" {
   value       = { for k, v in aws_secretsmanager_secret.secret : k => v.arn }
 }
 
-output "secrets_version_ids" {
-  description = "The version IDs of the created secret versions"
-  value       = { for k, v in aws_secretsmanager_secret_version.secret_version : k => v.version_id }
+locals {
+  secret_version = var.init_secrets ? aws_secretsmanager_secret_version.secret_version : aws_secretsmanager_secret_version.secret_non_init_version
 }
 
+output "secrets_version_ids" {
+  description = "The version IDs of the created secret versions"
+  value       = { for k, v in local.secret_version : k => v.version_id }
+}
 
 output "secrets_plaintext" {
   description = "The plaintext values of the created secrets"
-  value       = { for k, v in data.aws_secretsmanager_secret_version.lookup_version : k => v.secret_string }
+  value       = { for k, v in local.secret_version : k => v.secret_string }
   sensitive   = true
 }
 

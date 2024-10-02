@@ -8,7 +8,7 @@ variable "secrets" {
   type = list(object({
     path_prefix   = string
     path_key      = string
-    secret_string = string
+    secret_string = optional(string, null)
   }))
 }
 
@@ -16,7 +16,7 @@ variable "parameters" {
   description = "A map of parameters to create in Parameter Store"
   type = list(object({
     name  = string
-    value = string
+    value = optional(string, null)
     type  = string
   }))
   default = []

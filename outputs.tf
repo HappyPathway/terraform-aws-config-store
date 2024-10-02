@@ -1,10 +1,11 @@
-output "secrets_arns" {
-  description = "The ARNs of the created secrets"
-  value       = var.init_secrets ? { for k, v in aws_secretsmanager_secret.secret : k => v.arn } : {}
+locals {
+  secret         = var.init_secrets ? data.aws_secretsmanager_secret_version.secret : data.aws_secretsmanager_secret_version.secret_non_init
+  secret_version = var.init_secrets ? data.aws_secretsmanager_secret_version.secret_version : data.aws_secretsmanager_secret_version.secret_non_init_version
 }
 
-locals {
-  secret_version = var.init_secrets ? data.aws_secretsmanager_secret_version.secret_version : data.aws_secretsmanager_secret_version.secret_non_init_version
+output "secrets_arns" {
+  description = "The ARNs of the created secrets"
+  value       = var.init_secrets ? { for k, v in local.secret : k => v.arn } : {}
 }
 
 output "secrets_version_ids" {

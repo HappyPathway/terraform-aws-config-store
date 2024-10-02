@@ -7,7 +7,7 @@ resource "aws_ssm_parameter" "parameter" {
 }
 
 data "aws_ssm_parameter" "lookup" {
-  for_each = var.parameters
+  for_each = tomap({ for param in var.parameters : (param.name) => param })
 
   depends_on = [
     aws_ssm_parameter.parameter
